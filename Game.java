@@ -13,8 +13,8 @@ public class Game {
 		boolean ende = false;
 		while (ende == false) {
 			spielfeldAnzeigen();
-			int posZeile = eingeben("Bitte Zeile wählen", _zeilen);
-			int posSpalte = eingeben("Bitte Spalte wählen", _spalten);
+			int posZeile = eingeben("Bitte Zeile waehlen", _zeilen);
+			int posSpalte = eingeben("Bitte Spalte waehlen", _spalten);
 			ende = spielfeldPruefen(posZeile, posSpalte);
 		}
 	}
@@ -25,16 +25,30 @@ public class Game {
 			spielfeldAnzeigen();
 			System.out.println("Bummm\nDu hast leider die Mine erwischt...");
 			System.out.println("Game over!");
+			System.out.println("Gueltige Versuche: " + versuche);
 			return true;
 		} else {
 			spielfeld[zeile][spalte] = "[*]";
+			versuche++;
 			return false;
 		}
 	}
 	
-	public static int eingeben(String hinweis) {
-		String eingabe = JOptionPane.showInputDialog(hinweis);
-		return Integer.parseInt(eingabe);
+	public static int eingeben(String hinweis, int max) {
+		max--;
+		String eingabe;
+		int pos;
+		boolean ok = false;
+		do {
+			eingabe = JOptionPane.showInputDialog(hinweis + " (0.." + max + ")");
+			pos = Integer.parseInt(eingabe);
+			if (pos >= 0 && pos <= max) {
+				ok = true;
+			} else {
+				System.out.println("Achtung: bitte nur einen Wert zwischen 0 und " + max + " eingeben!");
+			}
+		} while (ok == false);
+		return pos;
 	}
 	
 	public static void spielfeldAnzeigen() {
