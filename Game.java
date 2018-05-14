@@ -7,19 +7,22 @@ public class Game {
 	static String[][] minenfeld = spielfeldAnlegen(_zeilen, _spalten, true);
 	static String[][] spielfeld = spielfeldAnlegen(_zeilen, _spalten, false);
 	static int mines = 0;
+	static int versuche = 0;
 	
 	public static void main(String[] args) {
 		boolean ende = false;
 		while (ende == false) {
 			spielfeldAnzeigen();
-			int posZeile = eingeben("Bitte Zeile wählen");
-			int posSpalte = eingeben("Bitte Spalte wählen");
+			int posZeile = eingeben("Bitte Zeile wählen", _zeilen);
+			int posSpalte = eingeben("Bitte Spalte wählen", _spalten);
 			ende = spielfeldPruefen(posZeile, posSpalte);
 		}
 	}
 	
 	public static boolean spielfeldPruefen(int zeile, int spalte) {
 		if (minenfeld[zeile][spalte] == "[x]") {
+			spielfeld[zeile][spalte] = "[X]";
+			spielfeldAnzeigen();
 			System.out.println("Bummm\nDu hast leider die Mine erwischt...");
 			System.out.println("Game over!");
 			return true;
