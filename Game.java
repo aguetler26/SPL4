@@ -1,10 +1,22 @@
 
 public class Game {
 
+	static int _zeilen = 3;
+	static int _spalten = 3;
+	
 	public static void main(String[] args) {
-		String[][] feld = spielfeldAnlegen(3,3);
+		String[][] feld = spielfeldAnlegen(_zeilen, _spalten);
 		// feld = mineSetzen(0,3);
-		System.out.println(feld.toString());
+		spielfeldAnzeigen(feld, _zeilen, _spalten);
+	}
+	
+	public static void spielfeldAnzeigen(String[][] feld, int zeilen, int spalten) {
+		for (int z = 0; z < zeilen; z++) {
+			for (int s = 0; s < spalten; s++) {
+				System.out.print(feld[z][s]);
+			}
+			System.out.println();
+		}
 	}
 	
 	public static String[][] spielfeldAnlegen(int zeilen, int spalten) {
